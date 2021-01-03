@@ -15,10 +15,8 @@ class appbutton:
 
     def button_app(self):
         btn = Button(self.window_job,text= self.button_text,command= self.button_func,padx=self.x_pad,pady=self.y_pad)
-        btn.grid(row= self.x_postion,column= self.y_postion)
-    def button_app_var(self):
-        btn = Button(self.window_job,text= self.button_text,command= lambda : self.button_func,padx=self.x_pad,pady=self.y_pad)
-        btn.grid(row=self.x_postion,column=self.y_postion)
+        btn.grid(row= self.x_postion,column= self.y_postion,sticky=self.align)
+
 
 class applabel:
 
@@ -62,13 +60,12 @@ class appdropmenu:
         self.x_pad = x_pad
 
     def dropmenu_app(self):
+        #global clicked
         clicked=StringVar()
-        clicked.set(self.column_headers)
+        clicked.set(self.column_headers[0])
         drop_jobapp = OptionMenu(self.window_job, clicked,*self.column_headers)
         drop_jobapp.grid(row=self.x_postion,column=self.y_postion,sticky=self.align,pady=self.y_pad)
-        
-
-
+        return clicked
 
 
 

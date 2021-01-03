@@ -1,6 +1,78 @@
 from tkinter import *
 import tkinter.messagebox as Messagebox
 import mysql.connector as mysql
+from GUI_hack import applabel ,appentry,appbutton ,appdropmenu
+
+#---------------------------------------------------------------------------------------
+column_headers=['Job number',
+'Date',
+'Company name',
+'Job title',
+'Location',
+'Salary',
+'Aptitude testing',
+'Automated interview',
+'Technical interview',
+'HR interview',
+'Job offer']
+type_input=['Enter job number',
+'Enter date e.g. year/month/day',
+'Enter company name',
+'Enter job title',
+'Job location',
+'Enter salary in £',
+'Enter due date for aptitude test(s) e.g year/month/day',
+'Enter due date for automated interview e.g year/month/day',
+'Enter date for technical interview e.g year/month/day',
+'Enter date for HR interview e.g year/month/day',
+'Enter current job status'
+]
+
+ap_column_headers=['Job number',
+    'Date',
+    'Company',
+    'Job title',
+    'Deadline',
+    'Numerical reasoning',
+    'Verbal reasoning',
+    'Inductive resoning',
+    'Deductive resoning',
+    'Situational judgement test',
+    'Work Behaviour assessment',
+    'Reading comprehesion test',
+    'Completion'
+]
+
+ap_type_input=['Enter job number',
+    'Enter date e.g year/month/day ',
+    'Enter Company name',
+    'Enter job title',
+    'Enter deadline date e.g year/month/day',
+    'Enter YES if completed, otherwise NO',
+    'Enter YES if completed, otherwise NO',
+    'Enter YES if completed, otherwise NO',
+    'Enter YES if completed, otherwise NO',
+    'Enter YES if completed, otherwise NO',
+    'Enter YES if completed, otherwise NO',
+    'Enter YES if completed, otherwise NO',
+    'Enter YES if completed, otherwise NO',
+    ]
+
+ai_column_headers=['Job number',
+    'Date',
+    'Company',
+    'Job title',
+    'Deadline',
+    'Completion'
+]
+
+ai_type_input=['Enter job number',
+    'Enter date e.g year/month/day ',
+    'Enter Company name',
+    'Enter job title',
+    'Enter deadline date e.g year/month/day',
+    'Enter YES if completed, otherwise NO'
+    ]
 
 root =Tk()
 #Title of window
@@ -17,103 +89,30 @@ def Newentry():
 def Delete_job():
     return
 def Entry_start():
-    global column_header
-    global type_input 
+
     en =Toplevel(root) #New window 
     en.iconbitmap('images/database.ico') #Window icon
     en.title('New entry') #window title
+
+    #--------------------------------------------------------------------------------------
+    
     #---------------------------------------------------------------------------------------
         # The labels of all the columns of the database 
 
-    job_number = Label(en,text='Job number').grid(row=0,column=0,sticky=W)
-    date = Label(en,text='Date').grid(row=1,column=0,sticky=W)
-    company = Label(en,text ='Company name').grid(row=2,column=0,sticky=W)
-    job_title = Label(en,text='Job title').grid(row=3,column=0,sticky=W) 
-    location = Label(en,text='Location').grid(row=4,column=0,sticky=W) 
-    salary = Label(en,text='Salary').grid(row=5,column=0,sticky=W) 
-    aptitude_testing = Label(en,text='Aptitude testing').grid(row=6,column=0,sticky=W) 
-    automated_interview = Label(en,text='Automated interview').grid(row=7,column=0,sticky=W) 
-    technical_interview = Label(en,text='Technical interview').grid(row=8,column=0,sticky=W) 
-    hr_interview = Label(en,text='HR interview').grid(row=9,column=0,sticky=W) 
-    job_offer = Label(en,text='Job offer').grid(row=10,column=0,sticky=W) 
-    #---------------------------------------------------------------------------------------
-    column_headers=['Date',
-    'Company name',
-    'Job title',
-    'Location',
-    'Salary',
-    'Aptitude testing',
-    'Automated interview',
-    'Technical interview',
-    'HR interview',
-    'Job offer']
-    type_input=['Enter job number',
-    'Enter date e.g. year/month/day',
-    'Enter company name',
-    'Enter job title',
-    'Job location',
-    'Enter salary in £',
-    'Enter due date for aptitude test(s) e.g year/month/day',
-    'Enter due date for automated interview e.g year/month/day',
-    'Enter date for technical interview e.g year/month/day',
-    'Enter date for HR interview e.g year/month/day',
-    'Enter job current job status'
-    ]
+    #job_number = Label(en,text='Job number').grid(row=0,column=0,sticky=W)
+    for i in range(len(column_headers)):
+        applabel(en,column_headers[i],i,0,W).label_app()
 
     #---------------------------------------------------------------------------------------
     # The entry boxes all the columns of the database 
-    width_size = 60
-    job_number_e = Entry(en,width= width_size)
-    job_number_e.grid(row=0,column=1,sticky=W,pady=10)
-    job_number_e.insert(0,"Enter job number")
 
-    date_e = Entry(en,width= width_size)
-    date_e.grid(row=1,column=1,sticky=W,pady=10)
-    date_e.insert(0,'Enter date e.g year/month/day')
+    for i in range(len(type_input)):
+        appentry(en,60,type_input[i],i,1,W,10,0).entry_app()
 
-    company_e = Entry(en,width = width_size)
-    company_e.grid(row=2,column=1,sticky=W,pady=10)
-    company_e.insert(0,'Enter company name')
-
-    job_title_e = Entry(en,width= width_size)
-    job_title_e.grid(row=3,column=1,sticky=W,pady=10)
-    job_title_e.insert(0,'Enter job title')
-
-    location_e = Entry(en,width= width_size)
-    location_e.grid(row=4,column=1,sticky=W,pady=10)
-    location_e.insert(0,'Job location')
-
-    salary_e = Entry(en,width= width_size)
-    salary_e.grid(row=5,column=1,sticky=W,pady=10)
-    salary_e.insert(0,'Enter salary in £')
-
-    aptitude_testing_e = Entry(en,width=width_size)
-    aptitude_testing_e.grid(row=6,column=1,sticky=W,pady=10)
-    aptitude_testing_e.insert(0,'Enter due date for aptitude testings e.g year/month/day')
-
-    automated_interview_e = Entry(en,width= width_size)
-    automated_interview_e.grid(row=7,column=1,sticky=W,pady=10)
-    automated_interview_e.insert(0,'Enter due date for automated interview e.g year/month/day')
-    
-    technical_interview_e = Entry(en,width= width_size)
-    technical_interview_e.grid(row=8,column=1,sticky=W,pady=10)
-    technical_interview_e.insert(0,'Enter date for technical interview e.g year/month/day') 
-
-    hr_interview_e = Entry(en,width= width_size)
-    hr_interview_e.grid(row=9,column=1,sticky=W,pady=10)
-    hr_interview_e.insert(0,'Enter date for HR interview e.g year/month/day')
-
-    job_offer_e = Entry(en,width=width_size)
-    job_offer_e.grid(row=10,column=1,sticky=W,pady=10) 
-    job_offer_e.insert(0,'Enter job current job status')
     #---------------------------------------------------------------------------------------
-
-    
-
-
-
-    btn1 = Button(en,text="Enter", command=Newentry).grid(row=11,column=2,sticky=E)
-    btn2 = Button(en,text="Close Window", command=en.destroy).grid(row=11,column=0,sticky=W)
+    appbutton(en,'Enter',Newentry,11,2,E,0,0).button_app()
+    appbutton(en,'Close Window',en.destroy,11,0,W,0,0).button_app()
+   
     return
 #--------------------------------------------------------------------------------------------------
 #--------------------------------------------------------------------------------------------------
@@ -121,86 +120,75 @@ def Delete_Entry():
     de=Toplevel()
     de.iconbitmap('images/database.ico')
     de.title('Delete entry')
-    de.geometry("200x100")
+    de.geometry("220x100")
 
-    job_number = Label(de,text='Job number')
-    job_number.grid(row=0,column=0,sticky=W)
+    applabel(de,column_headers[0],0,0,W).label_app()
 
     #------------------------------------------------------------------------------------------------
 
-    job_number_e=Entry(de,width=20)
-    job_number_e.grid(row=0,column=1)
-    job_number_e.insert(0,'Enter job number')
+    appentry(de,20,type_input[0],0,1,W,0,0).entry_app()
 
-    btn3 =Button(de,text="Enter", command=Delete_job).grid(row=1,column=0,sticky=W)
-    btn4 =Button(de,text="Close Window", command=de.destroy).grid(row=1,column=1,sticky=E)
+    #-------------------------------------------------------------------------------------------------
+
+    appbutton(de,'Enter',Delete_job,1,1,E,0,0).button_app()
+    appbutton(de,'Close Window',de.destroy,1,0,W,0,0).button_app()
     return
-def show(window_job,variable_job,x,y,width_size,type_input):
-    my_label=Label(window_job,text=variable_job.get()).grid(row=x, column=y)
 
-    update_par= Entry(window_job,width= width_size)
-    update_par.grid(row=x,column=y+1,sticky=W,pady=10)
-    update_par.insert(0,"Enter " + type_input+ variable_job.get())
+def show(window_job,variable_job,x,y,width_size,type_input,y_pad,x_pad,align,in_column_headers):
+    applabel(window_job,variable_job.get(),x,y,align).label_app()
+
+    appentry(window_job,width_size,type_input[in_column_headers.index(variable_job.get())],x,y+1,align,y_pad,x_pad).entry_app()
+
 
 def jobapp():
     ja=Toplevel()
     ja.iconbitmap('images/database.ico')
     ja.title('Update entry: Job application')
-    ja.geometry("350x405")
+    ja.geometry("550x405")
 
-    width_size = 30
+    applabel(ja,column_headers[0],0,0,W).label_app()
 
-    job_number = Label(ja,text='Job number')
-    job_number.grid(row=0,column=0,sticky=W)
+    appentry(ja,60,type_input[0],0,1,W,10,0).entry_app()
 
-    job_number_e = Entry(ja,width= width_size)
-    job_number_e.grid(row=0,column=1,sticky=W,pady=10)
-    job_number_e.insert(0,"Enter job number")
+    clicked =appdropmenu(ja,column_headers[1:],2,0,"",0,0).dropmenu_app()
 
-    column_headers=['Date',
-    'Company name',
-    'Job title',
-    'Location',
-    'Salary',
-    'Aptitude testing',
-    'Automated interview',
-    'Technical interview',
-    'HR interview',
-    'Job offer']
-    type_input =[
+    appbutton(ja,'Update',lambda :show(ja,clicked,3,0,60,type_input,10,0,W,column_headers),2,1,"",0,0).button_app()
 
-    ]
-    clicked=StringVar()
-    clicked.set(column_headers[0])
-    drop_jobapp = OptionMenu(ja, clicked,*column_headers).grid(row=2,column=0)
+    appbutton(ja,"Close Window",ja.destroy,4,0,W,0,0).button_app()
 
-    
-
-    #job_number = Label(ja,text=clicked.get())
-    #job_number.grid(row=3,column=0,sticky=W)
-
-
-    btn7=Button(ja,text='update',command= lambda:show(ja,clicked,3,0,width_size,type_input)).grid(row=2,column=1)
-
-
-
-    btn6=Button(ja,text="Close Window", command= ja.destroy).grid(row=4,column=0,sticky=W)
     return
 def aptest():
     at=Toplevel()
     at.iconbitmap('images/database.ico')
     at.title('Update entry: Aptitude testing')
-    at.geometry("265x405")
+    at.geometry("550x405")
 
-    btn8 =Button(at,text="Close Window", command=at.destroy).grid(row=3,column=0)
+    applabel(at,ap_column_headers[0],0,0,W).label_app()
+
+    appentry(at,60,ap_type_input[0],0,1,W,10,0).entry_app()
+
+    clicked =appdropmenu(at,ap_column_headers[1:],2,0,"",0,0).dropmenu_app()
+
+    appbutton(at,'Update',lambda :show(at,clicked,3,0,60,ap_type_input,10,0,W,ap_column_headers),2,1,"",0,0,).button_app()
+
+    appbutton(at,"Close Window",at.destroy,4,0,W,0,0).button_app()
+    
     return
 def autointer():
     ai=Toplevel()
     ai.iconbitmap('images/database.ico')
     ai.title('Update entry: Automated interview')
-    ai.geometry("265x405")
+    ai.geometry("550x405")
 
-    btn9 =Button(ai,text="Close Window", command=ai.destroy).grid(row=3,column=0)
+    applabel(ai,ai_column_headers[0],0,0,W).label_app()
+
+    appentry(ai,60,ai_type_input[0],0,1,W,10,0).entry_app()
+
+    clicked =appdropmenu(ai,ai_column_headers[1:],2,0,"",0,0).dropmenu_app()
+
+    appbutton(ai,'Update',lambda :show(ai,clicked,3,0,60,ap_type_input,10,0,W,ai_column_headers),2,1,"",0,0,).button_app()
+
+    appbutton(ai,"Close Window",ai.destroy,4,0,W,0,0).button_app()
     return
 def Update_Entry():
     up=Toplevel()
@@ -209,32 +197,33 @@ def Update_Entry():
     up.geometry("265x405")
     
     #Update job application button
-    jobapp_button = Button(up,text="Job application table",command=jobapp,padx=72.5,pady=50)
-    jobapp_button.grid(row=0,column=0)
+
+    appbutton(up,"Job application table",jobapp,0,0,W,50,72.5).button_app()
 
     # Update aptitude testing  button 
-    ap_test_button = Button(up,text="Aptitude testing table", command =aptest,padx=70,pady=50 ) 
-    ap_test_button.grid(row=1,column=0)
+
+    appbutton (up,"Aptitude testing table",aptest,1,0,W,50,70).button_app()
 
     # Update automated interview button
-    auto_inter_button = Button(up,text="Automated interview table",command=autointer,padx=57,pady=50)
-    auto_inter_button.grid(row=2,column=0)
 
-    btn10 =Button(up,text="Close Window", command=up.destroy).grid(row=3,column=0)
+
+    appbutton(up,"Automated interview table",autointer,2,0,W,50,57).button_app()
+
+    
+    appbutton(up,'Close Window',up.destroy,3,0,"",0,0).button_app()
     return 
 
 # New entry (Job application) button 
-Entry_button = Button(root,text="New Entry",command=Entry_start,padx=100,pady=50)
-Entry_button.grid(row=0,column=0)
+
+appbutton(root,"New entry",Entry_start,0,0,W,50,100).button_app()
 
 # Update entry (Job application) button 
-Update_button = Button(root,text="Update", command =Update_Entry,padx=108.4,pady=50 ) 
-Update_button.grid(row=1,column=0)
+
+appbutton(root,"Update",Update_Entry,1,0,W,50,108.4).button_app()
 
 # Delete current entry (Job application) button
-Delete_button = Button(root,text="Delete",command=Delete_Entry,padx=110.5,pady=50)
-Delete_button.grid(row=2,column=0)
 
+appbutton(root,"Delete",Delete_Entry,2,0,W,50,110.5).button_app()
 
 
 root.mainloop()
