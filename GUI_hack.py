@@ -14,9 +14,13 @@ class appbutton:
         self.x_pad = x_pad
 
     def button_app(self):
+        
         btn = Button(self.window_job,text= self.button_text,command= self.button_func,padx=self.x_pad,pady=self.y_pad)
         btn.grid(row= self.x_postion,column= self.y_postion,sticky=self.align)
+        return btn
 
+    
+    
 
 class applabel:
 
@@ -28,8 +32,16 @@ class applabel:
         self.align = align
 
     def label_app(self):
-        job_number = Label(self.window_job,text=self.label_text)
-        job_number.grid(row=self.x_postion,column=self.y_postion,sticky=self.align)
+        global my_label
+        my_label = Label(self.window_job,text=self.label_text)
+        my_label.grid(row=self.x_postion,column=self.y_postion,sticky=self.align)
+        return
+    
+    def label_del(self):
+        my_label.destroy()
+
+
+
 
 class appentry:
     def __init__(self,window_job,width_size,type_input,x_postion,y_postion,align,y_pad,x_pad):
@@ -43,9 +55,13 @@ class appentry:
         self.x_pad = x_pad
 
     def entry_app(self):
+        global job_number_e
         job_number_e = Entry(self.window_job,width= self.width_size)
         job_number_e.grid(row=self.x_postion,column=self.y_postion,sticky=self.align,pady=self.y_pad)
         job_number_e.insert(0,self.type_input)
+    def entry_del(self):
+        job_number_e.destroy()
+
         
 
 class appdropmenu:

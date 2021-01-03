@@ -134,11 +134,18 @@ def Delete_Entry():
     appbutton(de,'Close Window',de.destroy,1,0,W,0,0).button_app()
     return
 
-def show(window_job,variable_job,x,y,width_size,type_input,y_pad,x_pad,align,in_column_headers):
-    applabel(window_job,variable_job.get(),x,y,align).label_app()
+def show(window_job,variable_job,x,y,width_size,type_input,y_pad,x_pad,align,in_column_headers,but,disable):
 
-    appentry(window_job,width_size,type_input[in_column_headers.index(variable_job.get())],x,y+1,align,y_pad,x_pad).entry_app()
-
+    aplab = applabel(window_job,variable_job.get(),x,y,align)
+    apent = appentry(window_job,width_size,type_input[in_column_headers.index(variable_job.get())],x,y+1,align,y_pad,x_pad)
+    if disable == True:
+        aplab.label_del()
+        apent.entry_del()
+        but['state'] = NORMAL
+    elif disable == False:
+        aplab.label_app()
+        apent.entry_app()
+        but['state'] = DISABLED
 
 def jobapp():
     ja=Toplevel()
@@ -150,9 +157,16 @@ def jobapp():
 
     appentry(ja,60,type_input[0],0,1,W,10,0).entry_app()
 
-    clicked =appdropmenu(ja,column_headers[1:],2,0,"",0,0).dropmenu_app()
+    clicked =appdropmenu(ja,column_headers[1:],2,0,W,0,0).dropmenu_app()
 
-    appbutton(ja,'Update',lambda :show(ja,clicked,3,0,60,type_input,10,0,W,column_headers),2,1,"",0,0).button_app()
+    btnjo=appbutton(ja,'Update',lambda :show(ja,clicked,3,0,60,type_input,10,0,W,column_headers,btj,False),2,1,"",0,0)
+    btj=btnjo.button_app()
+    
+
+    appbutton(ja,'Refresh',lambda: show(ja,clicked,3,0,60,type_input,10,0,W,column_headers,btj,True),4,1,"",0,0).button_app()  
+
+    
+    
 
     appbutton(ja,"Close Window",ja.destroy,4,0,W,0,0).button_app()
 
@@ -169,7 +183,12 @@ def aptest():
 
     clicked =appdropmenu(at,ap_column_headers[1:],2,0,"",0,0).dropmenu_app()
 
-    appbutton(at,'Update',lambda :show(at,clicked,3,0,60,ap_type_input,10,0,W,ap_column_headers),2,1,"",0,0,).button_app()
+
+    btnjo=appbutton(at,'Update',lambda :show(at,clicked,3,0,60,ap_type_input,10,0,W,ap_column_headers,btj,False),2,1,"",0,0)
+    btj=btnjo.button_app()
+    
+
+    appbutton(at,'Refresh',lambda: show(at,clicked,3,0,60,ap_type_input,10,0,W,ap_column_headers,btj,True),4,1,"",0,0).button_app()  
 
     appbutton(at,"Close Window",at.destroy,4,0,W,0,0).button_app()
     
@@ -184,9 +203,15 @@ def autointer():
 
     appentry(ai,60,ai_type_input[0],0,1,W,10,0).entry_app()
 
-    clicked =appdropmenu(ai,ai_column_headers[1:],2,0,"",0,0).dropmenu_app()
+    clicked =appdropmenu(ai,ai_column_headers[1:],2,0,W,0,0).dropmenu_app()
 
-    appbutton(ai,'Update',lambda :show(ai,clicked,3,0,60,ap_type_input,10,0,W,ai_column_headers),2,1,"",0,0,).button_app()
+
+    
+    btnjo=appbutton(ai,'Update',lambda :show(ai,clicked,3,0,60,ai_type_input,10,0,W,ai_column_headers,btj,False),2,1,"",0,0)
+    btj=btnjo.button_app()
+    
+
+    appbutton(ai,'Refresh',lambda: show(ai,clicked,3,0,60,ai_type_input,10,0,W,ai_column_headers,btj,True),4,1,"",0,0).button_app()  
 
     appbutton(ai,"Close Window",ai.destroy,4,0,W,0,0).button_app()
     return
