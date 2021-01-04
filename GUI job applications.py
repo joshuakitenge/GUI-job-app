@@ -100,8 +100,10 @@ def Entry_start():
         # The labels of all the columns of the database 
 
     #job_number = Label(en,text='Job number').grid(row=0,column=0,sticky=W)
+    label_dict={}
     for i in range(len(column_headers)):
-        applabel(en,column_headers[i],i,0,W).label_app()
+        label_dict[column_headers[i]]= applabel(en,column_headers[i],i,0,W).label_app()
+    print(label_dict)
 
     #---------------------------------------------------------------------------------------
     # The entry boxes all the columns of the database 
@@ -112,6 +114,9 @@ def Entry_start():
     #---------------------------------------------------------------------------------------
     appbutton(en,'Enter',Newentry,11,2,E,0,0).button_app()
     appbutton(en,'Close Window',en.destroy,11,0,W,0,0).button_app()
+
+    btn1 = Button(en,text="Enter", command=Newentry).grid(row=11,column=2,sticky=E)
+    btn2 = Button(en,text="Close Window", command=en.destroy).grid(row=11,column=0,sticky=W)
    
     return
 #--------------------------------------------------------------------------------------------------
@@ -152,6 +157,8 @@ def jobapp():
     ja.iconbitmap('images/database.ico')
     ja.title('Update entry: Job application')
     ja.geometry("550x405")
+
+    
 
     applabel(ja,column_headers[0],0,0,W).label_app()
 
