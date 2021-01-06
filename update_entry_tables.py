@@ -74,6 +74,7 @@ class Update_tables:
         self.cur.execute(query)
         
         self.con.commit()
+        self.con.close()
 
         self.entered = Label(self.new_window,text="Job application {} succesfully updated {} in {} table".format(job_number,column_head,table_title_name),pady=10)
         self.entered.grid(row=4,column=0, columnspan=3)

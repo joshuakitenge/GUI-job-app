@@ -42,6 +42,7 @@ class Delete_Entry:
             self.cur.execute(query_delete)
 
             self.con.commit()
+            self.con.close()
 
             self.deleted = Label(self.new_window,text="Row deleted succesfully")
             self.deleted.grid(row=1,column=0, columnspan=2)

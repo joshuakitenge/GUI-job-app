@@ -32,13 +32,13 @@ class applabel:
         self.align = align
 
     def label_app(self):
-        global my_label
-        my_label = Label(self.window_job,text=self.label_text)
-        my_label.grid(row=self.x_postion,column=self.y_postion,sticky=self.align)
+        #global my_label
+        self.my_label = Label(self.window_job,text=self.label_text)
+        self.my_label.grid(row=self.x_postion,column=self.y_postion,sticky=self.align)
         return
     
     def label_del(self):
-        my_label.destroy()
+        self.my_label.destroy()
 
 
 
