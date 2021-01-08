@@ -1,11 +1,12 @@
 """
-Title:Job Database 
+
+Title:Job application Database 
 
 Author:Joshua Kitenge
 
 """
 
-# imports
+# Imports
 
 from tkinter import *
 from tkinter import ttk
@@ -16,7 +17,7 @@ from delete_entry import Delete_Entry
 from new_entry import New_Entry
 from update_entry import Update_Entry
 
-# The job database class   
+# The job application database class   
 
 class JobApplicationDatabase:
         def __init__(self,master):
@@ -76,7 +77,7 @@ class JobApplicationDatabase:
 
             self.password_entry = Entry(master,width=20)
             self.password_entry.grid(row=0,column=1,sticky=W,pady=10) # Defining the postion of the entry box on the window
-            self.password_entry.insert(0,"Enter password") # Entry box message with box 
+            self.password_entry.insert(0,"Enter password") # Entry box message within box 
 
             # Creating the button for the password 
 
