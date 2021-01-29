@@ -2,7 +2,7 @@
 
 Title:Job application Database 
 
-Author:Joshua Kitenge
+Author:Joshua Di-manteto Kitenge
 
 """
 
